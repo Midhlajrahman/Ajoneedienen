@@ -1,0 +1,1 @@
+{% load i18n crispy_forms_tags %}{% trans "Account approval on" %} {{ site.name }}

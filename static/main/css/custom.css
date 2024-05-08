@@ -1,0 +1,258 @@
+.form-control {
+    border-radius: 6px;
+    padding: 0.6rem 1rem;
+}
+
+.form-text,
+.form-text li {
+    font-size: 0.7rem;
+    color: #6c757d;
+}
+
+.fz-10 {
+    font-size: 10px;
+}
+
+.fz-11 {
+    font-size: 11px;
+}
+
+.fz-12 {
+    font-size: 12px;
+}
+
+.fz-13 {
+    font-size: 13px;
+}
+
+.fz-14 {
+    font-size: 14px;
+}
+
+.fz-15 {
+    font-size: 15px;
+}
+
+.fz-16 {
+    font-size: 16px;
+}
+
+.fz-17 {
+    font-size: 17px;
+}
+
+.fz-18 {
+    font-size: 18px;
+}
+
+.fz-19 {
+    font-size: 19px;
+}
+
+.fz-20 {
+    font-size: 20px;
+}
+
+.fz-21 {
+    font-size: 21px;
+}
+
+.fz-22 {
+    font-size: 22px;
+}
+
+.fz-23 {
+    font-size: 23px;
+}
+
+.fz-24 {
+    font-size: 24px;
+}
+
+.fz-25 {
+    font-size: 25px;
+}
+
+.fz-26 {
+    font-size: 26px;
+}
+
+.fz-27 {
+    font-size: 27px;
+}
+
+.fz-28 {
+    font-size: 28px;
+}
+
+.fz-29 {
+    font-size: 29px;
+}
+
+.fz-30 {
+    font-size: 30px;
+}
+
+.border-radius {
+    border-radius: 12px;
+}
+
+.bg-auth {
+    background-color: rgba(255, 255, 255, 0.8);
+    background-image: url("https://cdn.pixabay.com/photo/2016/12/26/17/28/spaghetti-1932466_1280.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
+}
+
+.main-list-card-button {
+    width: 40px;
+    height: 40px;
+    background-image: url("../images/arrow.png");
+    background-size: 216px 72px;
+    background-position: -16px -16px;
+    background-repeat: no-repeat;
+    transition-delay: 20ms;
+}
+
+.main-list-card-button:hover {
+    background-position: -64px -16px;
+
+}
+
+.form-check .form-check-input {
+    margin-left: 0;
+}
+
+.box {
+    padding: 20px;
+    border: 1px solid rgba(13, 110, 253, 0.25);
+    border-radius: 10px;
+
+}
+
+.btn-circle {
+    border-radius: 5px;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-link {
+    padding: 0.375rem 0.75rem;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-item:first-child .page-link,
+.page-item:last-child .page-link {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.pagination {
+    margin-top: 1rem;
+}
+
+.invalid-feedback strong {
+    font-weight: 500;
+}
+
+textarea.form-control {
+    height: 100px;
+}
+
+.form-switch .form-check-label {
+    display: block;
+    margin-left: 2.75rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.datepicker td,
+.datepicker th {
+    padding: 10px 15px;
+}
+
+.thumb img {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.table thead th {
+    border-top: 1px solid rgb(235, 237, 242);
+}
+
+.dt-buttons button {
+    margin-right: 10px;
+    padding: 8px 10px;
+    border-radius: 10px;
+}
+
+.btn-group>.btn:nth-child(n + 3),
+.btn-group> :not(.btn-check)+.btn,
+.btn-group>.btn-group:not(:first-child)>.btn,
+.btn-group>.btn:not(:last-child):not(.dropdown-toggle),
+.btn-group>.btn-group:not(:last-child)>.btn {
+    border-radius: 10px;
+    z-index: 12;
+    font-size: 12px;
+}
+
+.card-image {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+
+}
+
+canvas {
+    max-width: 100%;
+}
+
+#qrcode img {
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.nav-pills .nav-link {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 30px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #000;
+    background-color: #ccc;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-pills .nav-link.active {
+    background: linear-gradient(45deg, #ED2775 0%, #FF7448 100%);
+    color: #fff;
+}
+
+.brdr {
+    border-radius: 6px;
+}
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #ebedf2;
+    border-radius: 4px;
+    height: 38px;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 38px;
+}

@@ -1,0 +1,209 @@
+{% extends 'web/base.html' %}
+
+{% block header %}
+{% include 'web/includes/header.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="osahan-checkout">
+    <div class="d-none">
+        <div class="bg-primary border-bottom p-3 d-flex align-items-center">
+            <a class="toggle togglew toggle-2" href="#"><span></span></a>
+            <h4 class="fw-bold m-0 text-white">Checkout</h4>
+        </div>
+    </div>
+
+    <div class="container position-relative">
+        <div class="py-5 row g-4">
+            <div class="col-md-8">
+                {% comment %}
+                <div class="osahan-card bg-white border-bottom overflow-hidden">
+                    <div class="osahan-card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="d-flex p-3 align-items-center btn btn-link w-100" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                                aria-controls="collapseOne">
+                                <i class="feather-credit-card me-3"></i> Credit/Debit Card
+                                <i class="feather-chevron-down ms-auto"></i>
+                            </button>
+                        </h2>
+                    </div>
+                    <div class="osahan-card-body border-top p-3">
+                        <h6 class="m-0">Add new card</h6>
+                        <p class="small">WE ACCEPT <span class="osahan-card ms-2 fw-bold">( Master Card
+                                / Visa Card / Rupay )</span></p>
+                        <form>
+                            <div class="form-row">
+                                <div class="col-md-12 form-group mb-3">
+                                    <label class="form-label fw-bold small">Card number</label>
+                                    <div class="input-group">
+                                        <input placeholder="Card number" type="number" class="form-control">
+                                        <button class="btn btn-outline-secondary" type="button"><i
+                                                class="feather-credit-card"></i></button>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-8 form-group"><label class="form-label fw-bold small">Valid
+                                            through(MM/YY)</label><input placeholder="Enter Valid through(MM/YY)"
+                                            type="number" class="form-control"></div>
+                                    <div class="col-md-4 form-group"><label
+                                            class="form-label fw-bold small">CVV</label><input
+                                            placeholder="Enter CVV Number" type="number" class="form-control"></div>
+                                </div>
+                                <div class="col-md-12 form-group mb-3"><label class="form-label fw-bold small">Name on
+                                        card</label><input placeholder="Enter Card number" type="text"
+                                        class="form-control">
+                                </div>
+                                <div class="col-md-12 form-group mb-0">
+                                    <div class="form-check custom-checkbox">
+                                        <input class="form-check-input" type="checkbox" value id="custom-Check1">
+                                        <label class="form-check-label small" for="custom-Check1">
+                                            Securely save this card
+                                            for a faster checkout next time.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {% endcomment %}
+
+                <div class="offer-slider">
+                    {% for banner in checkout_ads %}
+                    <div class="cat-item pt-0">
+                        <a class="d-block text-center shadow-sm" href="javascript:void(0);">
+                            <img alt="#" src="{{banner.image.url}}" class="img-fluid rounded">
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div id="cartMenu">
+                    {% include 'web/includes/cart.html' %}
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+<div class="text-center">
+    <h6>Total Visitors Count : {{restaurant.visitor_count}}</h6>
+</div>
+<div class="text-center my-4">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+        Give A Feedback
+    </button>
+</div>
+{% include 'web/includes/mobile.html' %}
+
+
+{% endblock %}
+
+{% block javascript %}
+
+<script>
+    $(document).ready(function () {
+
+        // on .btn_decrease click, decrease quantity by 1 of input sibling, then send ajax request to web:cart_item_plus
+        $('.btn_decrease').click(function () {
+            var option = $(this).data('option');
+            var restaurant_pk = "{{restaurant.pk}}";
+            var session_key = "{{request.session.session_key}}";
+            var input = $(this).siblings('input');
+            var qty = parseInt(input.val());
+            input.val(qty - 1);
+            $.ajax({
+                url: "{% url 'web:cart_item_minus' %}",
+                data: {
+                    'option': option,
+                    'restaurant_pk': restaurant_pk,
+                    'session_key': session_key,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                success: function (data) {                   
+                    input.val(data.quantity);
+                },
+                error: function (xhr, status, error) {
+                    console.log("AJAX request failed:", status, error);
+                }
+            }).then(function () {
+                console.log("decrease");
+            });
+        });
+
+        // on .btn_increase click, increase quantity by 1 of input sibling, then send ajax request to web:cart_item_plus    
+        $('.btn_increase').click(function () {
+            var option = $(this).data('option');
+            var restaurant_pk = "{{restaurant.pk}}";
+            var session_key = "{{request.session.session_key}}";
+            var input = $(this).siblings('input');
+            var qty = parseInt(input.val());
+            input.val(qty + 1);
+            $.ajax({
+                url: "{% url 'web:cart_item_plus' %}",
+                data: {
+                    'option': option,
+                    'restaurant_pk': restaurant_pk,
+                    'session_key': session_key,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    input.val(data.quantity);
+                },
+                error: function (xhr, status, error) {
+                    console.log("AJAX request failed:", status, error);
+                }
+            }).then(function () {
+                console.log("increase");
+            });
+        });
+    });
+</script>
+
+<script>
+    // Function to encode a string for URL
+    function encodeURIString(str) {
+        return encodeURIComponent(str);
+    }
+
+    // Function to create the WhatsApp message link with item info and total
+    function createWhatsAppLink() {
+        var phoneNumber = '{{restaurant.phone}}';
+        var message = 'Hello, I would like to order from ' + encodeURIString('{{ restaurant.name }}') + ' at ' + encodeURIString('{{ restaurant.address }}') + '%0A%0A';
+        var totalPrice = 0;
+        
+        // Loop through cart items and add item details to the message
+        {% for cart_item in cart_items %}
+            var itemName = encodeURIString('{{ cart_item.product.product.name }}');
+            var itemVariant = encodeURIString('{{ cart_item.product.name }}');
+            var itemPrice = parseFloat('{{ cart_item.total_price }}');
+            
+            // Add item price to the total
+            totalPrice += itemPrice;
+            
+            // Append item information to the message
+            message += 'Item: ' + itemName + '%0A';
+            message += 'Variant: ' + itemVariant + '%0A';
+            message += 'Price: ₹' + itemPrice.toFixed(2) + '%0A%0A';
+        {% endfor %}
+        
+        // Add the total price to the message
+        message += 'Total Price: ₹' + totalPrice.toFixed(2) + '%0A%0A';
+        var whatsappLink = 'https://wa.me/' + phoneNumber + '?text=' + message;
+        return whatsappLink;
+    }
+
+    var whatsappButton = document.querySelector('.btn-lg');
+
+    whatsappButton.addEventListener('click', function() {
+        var link = createWhatsAppLink();
+        window.open(link);
+    });
+</script>
+{% endblock javascript %}

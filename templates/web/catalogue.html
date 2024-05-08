@@ -1,0 +1,234 @@
+{% extends 'web/base.html' %}
+{% load static %}
+
+{% block header %}
+{% include 'web/includes/header.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="osahan-home-page">
+
+    <div class="bg-primary p-3 d-none">
+        <div class="text-white mb-2">
+            <div class="title d-flex justify-content-center">
+                <h4 class="fw-bold m-0">{{restaurant}}</h4>
+            </div>
+        </div>
+        <form action="{% url 'web:restaurant_products' restaurant.pk %}" method="get">
+            <div class="input-group bg-white rounded shadow-sm mt-0">
+                <span class="input-group-text bg-transparent border-0 rounded-0"><i class="feather-search"></i></span>
+                <input type="text" class="form-control bg-transparent border-0 rounded-0 px-0 shadow-none" name="q" value="{{request.GET.q|default:''}}"
+                    placeholder="Search Menu" aria-label="Search ...">
+            </div>
+        </form>
+    </div>
+
+    <div class="container">
+        <div class="banner-slider">
+            {% for banner in banners %}
+            <div class="cat-item px-1 py-3 px-3">
+                <a class="d-block text-center shadow-sm" href="javascript:void(0);">
+                    <img alt="#" src="{{banner.image.url}}" class="img-fluid rounded">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if notifications %}
+    <div class="container mt-3 mb-2">
+        <div class="row">
+            <div class="col-md-8 mt-2">
+                <div class="marquee rounded">
+                    {% for notification in notifications %}
+                        <span class="marquee-text">👋 {{ notification }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-4 mt-2">
+                <form action="{% url 'web:restaurant_products' restaurant.pk %}" method="get">
+                    <div class="input-group bg-white rounded shadow-sm mt-0">
+                        <span class="input-group-text bg-transparent border-0 rounded-0"><i class="feather-search"></i></span>
+                        <input type="text" class="form-control bg-transparent border-0 rounded-0 px-0 shadow-none" name="q" value="{{request.GET.q|default:''}}"
+                            placeholder="Search Menu" aria-label="Search ...">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="container">
+        <div class="row px-3">
+            {% for category in restaurant.get_categories %}
+            <div class="cat-item px-1 py-2 col-xl-2 col-sm-3 col-6">
+                <a class="bg-white rounded p-2 text-center shadow-sm p-4 catslider" href="{{category.get_web_url}}">
+                    <img alt="" src="{{category.image.url}}" class="img-fluid mb-2 d-block"
+                        style="max-height: 80px;margin: 0 auto">
+                    <strong class="m-0">{{category.name}}</strong>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="container">
+        {% if restaurant.get_populars %}
+        <div class="py-3 title d-flex align-items-center">
+            <h5 class="m-0">Most popular</h5>
+        </div>
+
+        <div class="most_popular mb-3">
+            <div class="row">
+                {% for product in restaurant.get_populars %}
+                {% include 'web/includes/product.html' %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+
+
+        <div class="socials text-center my-4">
+            <div class="d-flex align-items-center justify-content-center">
+                {% if restaurant.phone %}
+                <a class="shadow sicon me-1" title="Call" target="_blank" href=tel:{{restaurant.phone|slugify}}">
+                    <img src="{% static 'web/img/call.png' %}"></a>
+                {% endif %}
+                {% if restaurant.whatsapp %}
+                <a class="shadow sicon me-1" title="whatsapp" target="_blank" href="https://wa.me/{{restaurant.whatsapp|slugify}}">
+                    <img src="{% static 'web/img/whatsapp.png' %}"></a>
+                {% endif %}
+                {% if restaurant.facebook_url %}
+                <a class="shadow sicon me-1" title="Facebook" target="_blank" href="{{restaurant.facebook_url}}">
+                    <img src="{% static 'web/img/facebook.png' %}"></a>
+                {% endif %}
+                {% if restaurant.instagram_url %}
+                <a class="shadow sicon me-1" title="Instagram" target="_blank" href="{{restaurant.instagram_url}}">
+                    <img src="{% static 'web/img/instagram.png' %}"></a>
+                {% endif %}
+                {% if restaurant.youtube_url %}
+                <a class="shadow sicon me-1" title="Youtube" target="_blank" href="{{restaurant.youtube_url}}">
+                    <img src="{% static 'web/img/youtube.png' %}"></a>
+                {% endif %}
+                {% if restaurant.twitter_url %}
+                <a class="shadow sicon me-1" title="Twitter" target="_blank" href="{{restaurant.twitter_url}}">
+                    <img src="{% static 'web/img/twitter.png' %}"></a>
+                {% endif %}
+                <a href="javascript:void(0)" class="shadow sicon me-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <img src="{% static 'web/img/profile.png' %}"></a>
+                </a>
+
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+
+{% include 'web/includes/mobile.html' %}
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">About {{restaurant}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex flex-wrap">
+                    {% if restaurant.feature_image %}
+                    <div class="mb-2">
+                        <img alt="" src="{{restaurant.feature_image.url}}" style="width: 100%;overflow: hidden;border-radius: 10px;">
+                    </div>
+                    {% endif %}
+                    <h6>{{restaurant.feature_title|default:""}}</h6>
+                    <div class="">
+                        <p>
+                            {{restaurant.feature_description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-center">
+    <h6>Total Visitors Count : {{restaurant.visitor_count}}</h6>
+</div>
+<div class="text-center my-4">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+        Give A Feedback
+    </button>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+
+        // on .btn_decrease click, decrease quantity by 1 of input sibling, then send ajax request to web:cart_item_plus
+        $('.btn_decrease').click(function () {
+            var option = $(this).data('option');
+            var restaurant_pk = "{{restaurant.pk}}";
+            var session_key = "{{request.session.session_key}}";
+            var input = $(this).siblings('input');
+            var qty = parseInt(input.val());
+            input.val(qty - 1);
+            $.ajax({
+                url: "{% url 'web:cart_item_minus' %}",
+                data: {
+                    'option': option,
+                    'restaurant_pk': restaurant_pk,
+                    'session_key': session_key,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    input.val(data.quantity);
+                },
+                error: function (xhr, status, error) {
+                    console.log("AJAX request failed:", status, error);
+                }
+            }).then(function () {
+                console.log("decrease");
+            });
+        });
+
+        // on .btn_increase click, increase quantity by 1 of input sibling, then send ajax request to web:cart_item_plus    
+        $('.btn_increase').click(function () {
+            var option = $(this).data('option');
+            var restaurant_pk = "{{restaurant.pk}}";
+            var session_key = "{{request.session.session_key}}";
+            var input = $(this).siblings('input');
+            var qty = parseInt(input.val());
+            input.val(qty + 1);
+            $.ajax({
+                url: "{% url 'web:cart_item_plus' %}",
+                data: {
+                    'option': option,
+                    'restaurant_pk': restaurant_pk,
+                    'session_key': session_key,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    input.val(data.quantity);
+                },
+                error: function (xhr, status, error) {
+                    console.log("AJAX request failed:", status, error);
+                }
+            }).then(function () {
+                console.log("increase");
+            });
+        });
+    });
+</script>
+
+
+
+{% endblock javascript %}

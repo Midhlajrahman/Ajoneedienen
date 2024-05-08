@@ -1,0 +1,41 @@
+<!-- Feedback Modal -->
+<div class="modal fade" id="feedbackModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="feedbackModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="feedbackModalLabel">Feedback</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <!-- Feedback form -->
+            <form id="feedbackForm" method="post" action="{% url 'main:submit_feedback' %}">
+                {% csrf_token %}
+                
+                <input type="hidden" name="restaurant_id" id="restaurant_id" value="{{restaurant.pk}}">
+                
+                <div class="form-group mb-2">
+                    <!-- <label for="reaction">Select Reaction:</label> -->
+                    <div class="btn-group" role="group" aria-label="Reaction buttons">
+                        <button type="button" data-value="good 😊" class="btn btn-outline-success reaction-btn"
+                            onclick="setReaction('good')">😊 Good</button>
+                        <button type="button" data-value="satisfied 😐" class="btn btn-outline-warning reaction-btn"
+                            onclick="setReaction('satisfied')">😐 Satisfied</button>
+                        <button type="button" data-value="bad 😞" class="btn btn-outline-danger reaction-btn"
+                            onclick="setReaction('bad')">😞 Bad</button>
+                    </div>
+                    <input type="hidden" name="reaction" id="reactionInput" value="">
+                </div>
+                <div class="form-group">
+                    
+                    <input type="text" name="feedbackName" id="feedbackName" placeholder="name" class="form-control mb-2">
+                    <textarea class="form-control" name="feedbackMessage" id="feedbackMessage" rows="4"
+                        placeholder="Type your feedback here..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-2">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

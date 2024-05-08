@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% load static extras %} {% block content %}
+<div class="page-header flex-wrap">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-home"></i>
+        </span>
+        {{object}}
+    </h3>
+    <nav aria-label="breadcrumb">
+        <a href="{% url 'main:subcategory_new' object.pk %}" class="my-1 btn btn-sm btn-primary">New Subcategory</a>
+        <a href="{% url 'main:product_new' %}" class="my-1 btn btn-sm btn-primary">New Product</a>
+    </nav>
+
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <p class="m-0">{{object.notification}}</p>
+            </div>
+        </div>       
+    </div>
+
+</div>
+
+{% endblock %}

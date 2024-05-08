@@ -1,0 +1,82 @@
+{% extends "base.html" %} {% load static extras %} {% block content %}
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-home"></i>
+        </span>
+        {{product}}
+    </h3>
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row gap-2">
+                    <div class="col-sm-12">
+                        <img alt="#" src="{{product.image.url}}" class="img-fluid item-img w-100 brdr shadow" style="height: 300px;width: 100%;object-fit: cover;">
+                    </div>
+                    <div class="col-md-12">
+                        <div class="position-relative">
+                            <div class="list-card-body pt-2">
+                                
+                                <div class="mb-3">
+                                    <a href="{% url 'main:option_new' product.pk %}" class="btn btn-sm btn-primary">Create New Option</a>
+                                </div>
+
+                               
+                                {% for option in product.get_options %}
+                                <div class="row border-bottom align-items-center">
+                                    <div class="col-md-9">
+                                        <div class="d-flex gap-2 p-3 gold-members flex-wrap">
+                                            {% if option.product.display_foodtype %}
+                                            {% if option.product.is_vegetarian %}
+                                            <span class="fw-bold bg-success non_veg"
+                                                style="width:20px;height:20px;display: block;"></span>
+                                            {% else %}
+                                            <span class="fw-bold bg-danger non_veg"
+                                                style="width:20px;height:20px;display: block;"></span>
+                                            {% endif %}
+                                            {% endif %}
+
+                                            <h6 class="mb-1">{{ option.name }}</h6>
+                                            <p class="text-muted mb-0">&#8377;{{ option.price }} ({{option.section|upper}})</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 text-end">
+                                        <a href="{{option.get_edit_url}}" class="p-1 btn bg-light btn-sm"><i class="mdi mdi-pencil text-info"></i></a>
+                                        <a href="{{option.get_delete_url}}" class="p-1 btn bg-light btn-sm"><i class="mdi mdi-delete text-danger"></i></a>
+                                    </div>
+
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <div class="position-relative">
+                            {% if product.description %}
+                            <div class="list-card-body">
+                                <h6 class="mb-1">Description: </h6>
+                                <p class="text-gray mb-3">{{product.description|linebreaksbr}}</p>
+                            </div>
+                            {% endif %}
+                            {% if product.ingredients %}
+                            <div class="list-card-body">
+                                <h6 class="mb-1">Ingredients: </h6>
+                                <p class="text-gray mb-3">{{product.ingredients|linebreaksbr}}</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

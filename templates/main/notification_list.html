@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% load static extras %} {% block content %}
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-home"></i>
+        </span>
+        Notifications
+    </h3>
+    <nav aria-label="breadcrumb">
+        <a href="{% url 'main:notification_new' %}" class="btn btn-sm btn-primary">Create New</a>
+    </nav>
+</div>
+
+<div class="card card-body">
+    {% if notifications %}
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Notification</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for notification in notifications %}
+                <tr>
+                    <td>{{notification.notification}}</td>
+                    <td>
+                        <div class="button_container text-center">
+                            <a href="{{notification.get_edit_url}}" class="btn bg-light btn-sm"><i class="mdi mdi-pencil text-primary"></i></a>
+                            <a href="{{notification.get_delete_url}}" class="btn bg-light btn-sm"><i class="mdi mdi-delete text-danger"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    {% else %}
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">No notifications found.</h5>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% include "partials/pagination.html" %}
+</div>
+
+{% endblock %}

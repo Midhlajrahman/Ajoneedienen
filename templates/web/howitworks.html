@@ -1,0 +1,44 @@
+{% extends 'web/base.html' %}
+
+{% block header %}
+{% include 'web/includes/header.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="osahan-checkout">
+    <div class="d-none">
+        <div class="bg-primary border-bottom p-3 d-flex align-items-center">
+            <a class="toggle togglew toggle-2" href="#"><span></span></a>
+            <h4 class="fw-bold m-0 text-white">How It Works</h4>
+        </div>
+    </div>
+
+    <div class="container position-relative">
+        <div class="py-5 row g-4">
+            <div class="col-md-8 mx-auto">
+                <div class='embed-container'>
+                    <iframe src='https://www.youtube.com/embed/3QmEDq0fnWw' frameborder='0'
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="banner-slider">
+        {% for banner in banners %}
+        <div class="cat-item px-1 py-3 px-3">
+            <a class="d-block text-center shadow-sm" href="javascript:void(0);">
+                <img alt="#" src="{{banner.image.url}}" class="img-fluid rounded">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% include 'web/includes/mobile.html' %}
+
+
+{% endblock %}

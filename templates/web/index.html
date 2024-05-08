@@ -1,0 +1,97 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block header %}
+<header class="section-header d-block">
+    <section class="header-main shadow-sm bg-white">
+        <div class="container">
+            <div class="row align-items-center py-2 justify-content-between">
+                <div class="col-4">
+                    <a href="/" class="brand-wrap mb-0">
+                        <img class="img-fluid" src="{% static 'main/images/logo.png' %}" style="object-fit: contain;">
+                    </a>
+                </div>
+                <div class="col-4">
+                    {% if request.user.is_authenticated %}
+                    <div class="d-flex align-items-center justify-content-end">
+                        <a href="{% url 'main:index' %}" class="widget-header me-2 text-white btn bg-info">
+                            <div class="icon d-flex align-items-center">
+                                Dashboard</span>
+                            </div>
+                        </a>
+                        <a href="{% url 'auth_logout' %}" class="widget-header me-4 text-white btn bg-primary">
+                            <div class="icon d-flex align-items-center">
+                                <span>Logout</span>
+                            </div>
+                        </a>
+
+                    </div>
+                    {% else %}
+                    <div class="d-flex align-items-center justify-content-end">
+                        <a href="{% url 'auth_login' %}" class="widget-header me-2 text-white btn bg-info">
+                            <div class="icon d-flex align-items-center">
+                                Login</span>
+                            </div>
+                        </a>
+                        <a href="{% url 'main:registration_register' %}"
+                            class="widget-header me-4 text-white btn bg-primary">
+                            <div class="icon d-flex align-items-center">
+                                <span>Register</span>
+                            </div>
+                        </a>
+
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="osahan-home-page">
+
+    <div class="bg-primary p-3 d-none">
+        <div class="text-white">
+            <div class="title d-flex">
+                <h4 class="fw-bold m-0">Ajoneedienen</h4>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+
+        <div class="offer-slider">
+            <div class="cat-item px-1 py-3">
+                <a class="d-block text-center shadow-sm" href="javascript:void(0);">
+                    <img alt="#" src="/static/web/img/slider.jpg" class="img-fluid rounded">
+                </a>
+            </div>
+        </div>
+
+        {% if badges %}
+        <div class="py-3 title d-flex align-items-center">
+            <h5 class="m-0">Statistics</h5>
+        </div>
+
+        <div class="most_popular mb-5">
+
+            <div class="row">
+                {% for badge in badges %}
+                <div class="col-md-3 col-md-4 col-6">
+                    <div class="card border-danger">
+                        <div class="card-body">
+                            <h6>{{badge.title}}</h6>
+                            <h4 class="text-danger">{{badge.value}}</h4>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

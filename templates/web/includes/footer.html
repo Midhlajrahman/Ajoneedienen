@@ -1,0 +1,90 @@
+{% load static %}
+<footer class="section-footer border-top bg-dark  mt-3 mt-md-5">
+    <div class="container top_container">
+        <div class="footer-top padding-y py-5">
+            <div class="row">
+                <aside class="col-md-4 footer-about">
+                    <div><img alt="#" src="{% static 'main/images/logo.png' %}" class="logo-footer me-3"></div>
+                    <article class="d-flex pb-3">
+                        <div>
+                            <h6 class="title text-white">About Us</h6>
+                            <p class="text-muted">
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus quasi velit quae
+                                consequatur a aperiam et eaque reprehenderit quo expedita magnam veniam officia dicta
+                                cupiditate nihil, ullam pariatur, consectetur consequuntur.
+                            </p>
+                            <div class="d-flex align-items-center justify-content-start">
+                                {% if restaurant.facebook_url %}
+                                <a class="sicon me-1" title="Facebook" target="_blank"
+                                    href="{{restaurant.facebook_url}}">
+                                    <img src="{% static 'web/img/facebook.png' %}"></a>
+                                {% endif %}
+                                {% if restaurant.instagram_url %}
+                                <a class="sicon me-1" title="Instagram" target="_blank"
+                                    href="{{restaurant.instagram_url}}">
+                                    <img src="{% static 'web/img/instagram.png' %}"></a>
+                                {% endif %}
+                                {% if restaurant.youtube_url %}
+                                <a class="sicon me-1" title="Youtube" target="_blank" href="{{restaurant.youtube_url}}">
+                                    <img src="{% static 'web/img/youtube.png' %}"></a>
+                                {% endif %}
+                                {% if restaurant.twitter_url %}
+                                <a class="sicon me-1" title="Twitter" target="_blank" href="{{restaurant.twitter_url}}">
+                                    <img src="{% static 'web/img/twitter.png' %}"></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </article>
+                </aside>
+                <aside class="col-sm-3 col-md-2 text-white">
+                    <h6 class="title">Admin Pages</h6>
+                    <ul class="list-unstyled hov_footer">
+                        <li> <a href="{% url 'main:restaurant_index' %}" class="text-muted">Dashboard</a>
+                        <li> <a href="{% url 'main:restaurant_update' %}" class="text-muted">Update Profile</a>
+                        <li> <a href="{% url 'main:category_list' %}" class="text-muted">Categories</a>
+                            <li> <a href="{% url 'main:subcategory_list' %}" class="text-muted">Subcategories</a>
+                                
+                            </ul>
+                        </aside>
+                        <aside class="col-sm-3 col-md-2 text-white">
+                            <h6 class="title">Add New</h6>
+                            <ul class="list-unstyled hov_footer">
+                        <li> <a href="{% url 'main:category_new' %}" class="text-muted">New Category</a>
+                        <li> <a href="{% url 'main:product_list' %}" class="text-muted">Products</a>
+                        <li> <a href="{% url 'main:product_new' %}" class="text-muted">New Product</a>
+                    </ul>
+                </aside>
+                <aside class="col-sm-3  col-md-2 text-white">
+                    <h6 class="title">For users</h6>
+                    <ul class="list-unstyled hov_footer">
+                        <li> <a href="{% url 'main:registration_register' %}" class="text-muted"> User register </a></li>
+                        <li> <a href="{% url 'auth_login' %}" class="text-muted"> User Login </a></li>
+                        <li> <a href="{% url 'auth_logout' %}" class="text-muted"> User Logout </a></li>
+                        <li> <a href="{% url 'auth_password_change' %}" class="text-muted">Change Password</a></li>
+                    </ul>
+                </aside>
+                <aside class="col-sm-3  col-md-2 text-white">
+                    <h6 class="title">More Pages</h6>
+                    <ul class="list-unstyled hov_footer">
+                        <li> <a href="#" class="text-muted"> Trending </a></li>
+                        <li> <a href="#" class="text-muted"> Most popular </a></li>
+                        <li> <a href="#" class="text-muted"> Restaurant Details </a></li>
+                        <li> <a href="#" class="text-muted"> Favorites </a></li>
+                    </ul>
+
+                </aside>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-copyright border-top py-3 bg-light">
+        <div class="container text-center">
+            <p class="mb-0"> © {% now 'Y' %} Ajoneedienen All rights reserved </p>
+        </div>
+    </div>
+</footer>
+
+

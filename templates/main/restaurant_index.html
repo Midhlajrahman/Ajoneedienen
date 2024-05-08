@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% load static extras %} {% block content %}
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-home"></i>
+        </span>
+        Dashboard
+    </h3>
+
+</div>
+
+<div class="row">
+    <div class="col-md-3 mb-2">
+        <div class="card">
+            <div class="card-body">
+                <div id="qrcode"></div>
+                <div class="button_container mt-4 text-center">
+                    <a class="btn btn-info btn-sm" id="downloadBtn">Download</a>
+                    <a href="{{domain}}{{restaurant.get_web_url}}" class="btn btn-primary btn-sm" target="_blank">Open</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-primary card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="{% static 'main/images/dashboard/circle.svg' %}" class="card-img-absolute"
+                            alt="circle-image">
+                        <h4 class="font-weight-normal mb-3">Categories</h4>
+                        <h2 class="mb-2 fw-bold">{{category_count}}</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-danger card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="{% static 'main/images/dashboard/circle.svg' %}" class="card-img-absolute"
+                            alt="circle-image">
+                        <h4 class="font-weight-normal mb-3">Subcategories</h4>
+                        <h2 class="mb-2 fw-bold">{{subcategory_count}}</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-info card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="{% static 'main/images/dashboard/circle.svg' %}" class="card-img-absolute"
+                            alt="circle-image">
+                        <h4 class="font-weight-normal mb-3">Products</h4>
+                        <h2 class="mb-2 fw-bold">{{product_count}}</h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block custom_js %}
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script>
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: "{{domain}}{{restaurant.get_web_url}}",
+        width: 400,
+        height: 400,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+    
+    document.getElementById("downloadBtn").addEventListener("click", function () {
+        // Capture the QR code as an image using html2canvas
+        html2canvas(document.getElementById("qrcode")).then(function (canvas) {
+            // Convert the canvas to a data URL
+            var imageData = canvas.toDataURL("image/png");
+
+            // Create a temporary download link and trigger the download
+            var downloadLink = document.createElement("a");
+            downloadLink.href = imageData;
+            downloadLink.download = "qrcode.png";
+            downloadLink.click();
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,77 @@
+<script>
+    $(document).ready(function () {
+
+        // on .btn_decrease click, decrease quantity by 1 of input sibling, then send ajax request to web:cart_item_plus
+        $('.btn_decrease').click(function () {
+            var option = $(this).data('option');
+            var restaurant_pk = "{{object.restaurant.pk}}";
+            var session_key = "{{request.session.session_key}}";
+            var input = $(this).siblings('input');
+            var qty = parseInt(input.val());
+            input.val(qty - 1);
+            $.ajax({
+                url: "{% url 'web:cart_item_minus' %}",
+                data: {
+                    'option': option,
+                    'restaurant_pk': restaurant_pk,
+                    'session_key': session_key,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                success: function (data) {                   
+                    input.val(data.quantity);
+                },
+                error: function (xhr, status, error) {
+                    console.log("AJAX request failed:", status, error);
+                }
+            }).then(function () {
+                console.log("decrease");
+                updateCart();
+            });
+        });
+
+        // on .btn_increase click, increase quantity by 1 of input sibling, then send ajax request to web:cart_item_plus    
+        $('.btn_increase').click(function () {
+            var option = $(this).data('option');
+            var restaurant_pk = "{{object.restaurant.pk}}";
+            var session_key = "{{request.session.session_key}}";
+            var input = $(this).siblings('input');
+            var qty = parseInt(input.val());
+            input.val(qty + 1);
+            $.ajax({
+                url: "{% url 'web:cart_item_plus' %}",
+                data: {
+                    'option': option,
+                    'restaurant_pk': restaurant_pk,
+                    'session_key': session_key,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    input.val(data.quantity);
+                },
+                error: function (xhr, status, error) {
+                    console.log("AJAX request failed:", status, error);
+                }
+            }).then(function () {
+                console.log("increase");
+                updateCart();
+            });
+        });
+
+        function updateCart() {
+            var url = "{% url 'web:checkout_ajax' object.restaurant.pk %}";
+            $.ajax({
+                url: url,
+                dataType: 'html',
+                success: function (data) {
+                    console.log("got data from " + url);
+                    $('#cartMenu').html(data);
+                },
+                error: function (xhr, status, error) {
+                    console.log("AJAX request failed:", status, error);
+                }
+            });
+        }
+    });
+</script>

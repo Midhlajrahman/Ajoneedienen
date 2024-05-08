@@ -1,0 +1,65 @@
+{% extends "base.html" %} {% load static extras %} {% block content %}
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-home"></i>
+        </span>
+        Restaurants
+    </h3>
+    <nav aria-label="breadcrumb">
+        <a href="{% url 'main:restaurant_new' %}" class="btn btn-sm btn-primary">Create New</a>
+    </nav>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                {% if restaurants %}
+                <div class="table-responsive">
+                    <table class="table table-bordered datatable">
+
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>User</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        {% for restaurant in restaurants %}
+                        <tr>
+                            <td>
+                                <a href="{{restaurant.get_absolute_url}}">
+                                    {% if restaurant.logo %}
+                                    <img src="{{restaurant.logo.url}}" alt="logo" class="me-2 shadow-sm" style="max-height: 40px;" />
+                                    {% endif %}
+                                    {{restaurant.name}}
+                                </a>
+                            </td>
+                            <td>{{restaurant.user}}</td>
+                            <td>{{restaurant.phone}}</td>
+                            <td>{{restaurant.address}}</td>
+                            <td>
+                                <a href="{% url 'main:restaurant_edit' restaurant.pk %}"
+                                    class="btn btn-sm bg-inverse-primary btn-circle py-1 px-2">
+                                    <i class="mdi mdi-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                {% else %}
+                <p>No restaurants found.</p>
+                {% endif %}
+
+                {% include "partials/pagination.html" %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

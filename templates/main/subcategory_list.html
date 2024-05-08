@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% load static extras %} {% block content %}
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-home"></i>
+        </span>
+        Subcategories
+    </h3>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                {% if subcategories %}
+                <div class="table-responsive">
+                    <table class="table table-bordered datatable">
+
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        {% for subcategory in subcategories %}
+                        <tr>
+                            <td><img src="{% if subcategory.image %}{{subcategory.image.url}}{% else %}{% static 'web/img/no_image.png' %}{% endif %}" alt="subcategory image" width="100%"></td>
+                            <td>{{subcategory.name}}</td>
+                            <td>{{subcategory.category}}</td>
+                            <td>
+                                <a href="{{subcategory.get_edit_url}}"
+                                    class="btn btn-sm bg-inverse-primary btn-circle py-1 px-2">
+                                    <i class="mdi mdi-pencil"></i>
+                                </a>
+                                <a href="{{subcategory.get_delete_url}}"
+                                    class="btn btn-sm bg-inverse-primary btn-circle py-1 px-2">
+                                    <i class="mdi mdi-delete"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                {% else %}
+                <p>No Subcategories found.</p>
+                {% endif %}
+
+                {% include "partials/pagination.html" %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

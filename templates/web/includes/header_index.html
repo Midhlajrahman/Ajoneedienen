@@ -1,0 +1,29 @@
+{% load static %}
+<header class="section-header">
+    <section class="header-main shadow-sm bg-white">
+        <div class="container">
+            <div class="row align-items-center py-2">
+                <div class="col-4">
+                    <a href="/" class="brand-wrap mb-0">
+                        <img class="img-fluid" src="{% static 'main/images/logo.png' %}">
+                    </a>
+                </div>
+                <div class="col-8">
+                    <div class="d-flex align-items-center justify-content-end pe-5">
+                        <a href="#" class="widget-header me-4 text-dark">
+                            <div class="icon d-flex align-items-center">
+                                <i class="feather-search h6 me-2 mb-0"></i> <span>Search</span>
+                            </div>
+                        </a>
+                        <a href="{% url 'web:checkout' restaurant.pk %}" class="widget-header me-4 text-white btn bg-primary m-none">
+                            <div class="icon d-flex align-items-center">
+                                <i class="feather-shopping-cart h6 me-2 mb-0"></i> <span>Cart</span>
+                            </div>
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>

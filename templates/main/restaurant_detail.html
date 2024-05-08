@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% load static extras %} {% block content %}
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-home"></i>
+        </span>
+        {{restaurant}}
+    </h3>
+    
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row gap-2">
+                    {% if restaurant.logo %}
+                    <div class="col-md-2">
+                        <div class="box text-center">
+                            <img src="{{restaurant.logo.url}}" alt="logo" class="img-fluid" style="max-height: 100px;" />
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="col-md-8">
+                        <h4 class="mb-3">{{restaurant.name}}</h4>
+
+                        {% if restaurant.description %}
+                        <p class="mb-1"><b>Description</b>: {{restaurant.description}}</p>
+                        {% endif %}
+
+                        {% if restaurant.address %}
+                        <p class="mb-1"><b>Address</b>: {{restaurant.address}}</p>
+                        {% endif %}
+
+                        {% if restaurant.phone %}
+                        <p class="mb-1"><b>Phone</b>: {{restaurant.phone}}</p>
+                        {% endif %}
+
+                        {% if restaurant.email %}
+                        <p class="mb-1"><b>Email</b>: {{restaurant.email}}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 mt-4">
+      
+    </div>
+</div>
+
+{% endblock %}

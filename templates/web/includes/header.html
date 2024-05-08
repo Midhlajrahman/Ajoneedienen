@@ -1,0 +1,32 @@
+{% load static %}
+<header class="section-header">
+    <section class="header-main shadow-sm bg-white">
+        <div class="container">
+            <div class="row align-items-center py-2">
+                <div class="col-4">
+                    <a href="{{restaurant.get_web_url}}" class="brand-wrap mb-0">
+                        {% if restaurant.logo %}
+                        <img class="img-fluid" src="{{restaurant.logo.url}}">
+                        {% else %}
+                        <img class="img-fluid" src="{% static 'main/images/logo.png' %}">
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="col-8">
+                    <div class="d-flex align-items-center justify-content-end pe-5">
+                        <a href="tel:+91{{restaurant.phone|slugify}}" class="widget-header me-4 text-white btn bg-success">
+                            <div class="icon d-flex align-items-center">
+                                <i class="feather-phone h6 me-2 mb-0"></i> <span>Call</span>
+                            </div>
+                        </a>
+                        <a href="{% url 'web:checkout' restaurant.pk %}" class="widget-header me-4 text-white btn bg-primary">
+                            <div class="icon d-flex align-items-center">
+                                <i class="feather-shopping-cart h6 me-2 mb-0"></i> <span>Cart</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>

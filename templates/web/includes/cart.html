@@ -1,0 +1,97 @@
+{% load tags %}
+<div class="osahan-cart-item rounded rounded shadow-sm overflow-hidden bg-white sticky_sidebar mb-3">
+    <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3 justify-content-between">
+        <div class="d-flex flex-column">
+            <h6 class="mb-1 fw-bold">{{restaurant.name}}</h6>
+            <p class="mb-0 small text-muted"><i class="feather-map-pin"></i>{{restaurant.address}}</p>
+        </div>
+        <button class="btn btn-light toggle ml-auto border-danger" onClick="window.location.reload();"><i class="feather-refresh-cw"></i></button>
+    </div>
+    {% if cart_items %}
+    <div class="bg-white border-bottom py-2">
+        {% for cart_item in cart_items %}
+        <div class="gold-members d-flex align-items-center justify-content-between px-3 py-2 flex-wrap">
+            <div class="d-flex align-items-center mb-2">
+                {% if cart_item.product.display_foodtype %}
+                {% if cart_item.product.product.is_vegetarian %}
+                <div class="fw-bold text-success non_veg">.</div>
+                {% else %}
+                <div class="fw-bold text-danger non_veg">.</div>
+                {% endif %}
+                {% endif %}
+                <div class="media-body ms-2">
+                    <p class="m-0">{{ cart_item.product.product.name }}
+                        <span>({{ cart_item.product.name }})</span>
+                    </p>
+                </div>
+            </div>
+            <div class="">
+                <span class="count-number d-block">
+                    <button type="button" class="btn-sm left btn_decrease btn btn-outline-secondary"
+                        data-option="{{ cart_item.product.pk }}">
+                        <i class="feather-minus"></i>
+                    </button>
+
+                    <input class="count-number-input" type="text" readonly
+                        value="{% get_qty request.session.session_key cart_item.product restaurant %}">
+
+                    <button type="button" class="btn-sm right btn_increase btn btn-outline-secondary"
+                        data-option="{{ cart_item.product.pk }}">
+                        <i class="feather-plus"></i>
+                    </button>
+                </span>
+                <p class="text-gray mb-0 float-end ms-2 text-muted small">&#8377;{{ cart_item.total_price }}</p>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="bg-white p-3">
+        <h6 class="fw-bold mb-0">List Total <span class="float-end">&#8377;{{ total_price }}</span></h6>
+    </div>
+
+    <div class="p-3">
+        <button class="btn btn-success w-100 btn-lg" {% if restaurant.enable_sending == True %} onclick="sendCartToWhatsApp()" {% else %} disabled {% endif %}>Send List <i class="feather-arrow-right"></i></a>
+    </div>
+    
+    {% else %}
+    <div class="p-3">Your List is Empty</div>
+    {% endif %}
+</div>
+
+<script>
+    function sendCartToWhatsApp() {
+        // Get the cart items
+        var cartItems = [];
+        {% for cart_item in cart_items %}
+            cartItems.push("{{ cart_item.product.product.name }} ({{ cart_item.product.name }}) - {{ cart_item.quantity }}");
+        {% endfor %}
+        
+        var restaurant = "{{ restaurant.name }}";
+
+        // Get the current time in AM/PM format
+        var currentTime = new Date();
+        var hours = currentTime.getHours();
+        var minutes = currentTime.getMinutes();
+        var ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // Handle midnight (12:00 AM)
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+
+        var time = hours + ':' + minutes + ' ' + ampm;
+
+        // Create the message
+        var message = restaurant + '\n' + time + "\nMy Menu:\n" + cartItems.join("\n");
+    
+        // Encode the message for a URL
+        var encodedMessage = encodeURIComponent(message);
+        var whatsappNumber = "{{ restaurant.phone }}";
+        
+        // Create the WhatsApp link
+        var whatsappLink = "https://api.whatsapp.com/send?phone=" + whatsappNumber + "&text=" + encodedMessage;
+    
+        // Open WhatsApp in a new tab/window
+        window.open(whatsappLink, "_blank");
+    }
+</script>

@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% load static extras %} {% block content %}
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-home"></i>
+        </span>
+        Products
+    </h3>
+    <nav aria-label="breadcrumb">
+        <a href="{% url 'main:product_new' %}" class="btn btn-sm btn-primary">Create New</a>
+    </nav>
+</div>
+
+<div class="d-flex gap-2 flex-wrap">
+    {% for product in products %}
+    <div class="" style="width:200px">
+        <div class="card">
+            <a href="{{product.get_absolute_url}}" class="card-body d-inline-block p-3">
+                <img src="{{product.image.url}}" alt="" class="card-image mx-auto" style="height: 80px;">
+                <h5 class="mb-0 mt-3 fw-bold text-center text-black fz-12">{{product.name}}</h5>
+            </a>
+        </div>
+        <div class="card-footer">
+            <div class="button_container text-center">
+                <a href="{{product.get_absolute_url}}" class="btn bg-light btn-sm"><i class="mdi mdi-eye text-info"></i></a>
+                <a href="{{product.get_edit_url}}" class="btn bg-light btn-sm"><i class="mdi mdi-pencil text-primary"></i></a>
+                <a href="{{product.get_delete_url}}" class="btn bg-light btn-sm"><i class="mdi mdi-delete text-danger"></i></a>
+            </div>
+        </div>
+    </div>
+
+    {% empty %}
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">                
+                <h5 class="m-0">No Products found.</h5>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% include "partials/pagination.html" %}
+</div>
+
+{% endblock %}
