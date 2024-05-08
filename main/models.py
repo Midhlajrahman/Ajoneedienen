@@ -53,6 +53,7 @@ class Restaurant(BaseModel):
     instagram_url = models.URLField(max_length=200, blank=True, null=True)
     youtube_url = models.URLField(max_length=200, blank=True, null=True)
     twitter_url = models.URLField(max_length=200, blank=True, null=True)
+    location_url = models.URLField(max_length=200, blank=True, null=True)
 
     feature_title = models.CharField(max_length=200, blank=True, null=True)
     feature_image = models.ImageField(upload_to="restaurant/feature_images/")

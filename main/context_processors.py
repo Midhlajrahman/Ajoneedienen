@@ -17,7 +17,7 @@ def main_context(request):
         new_site.save()
 
     if request.user.is_authenticated:
-        usertype = "Administator" if request.user.is_superuser else "Restaurant"
+        usertype = "Administator" if request.user.is_superuser else "Shop"
     else:
         usertype = "Guest"
     return {

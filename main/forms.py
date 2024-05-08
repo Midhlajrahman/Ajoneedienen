@@ -20,6 +20,7 @@ class RestaurantCreateForm(forms.ModelForm):
             "instagram_url",
             "youtube_url",
             "twitter_url",
+            "location_url",
             "enable_sending",
         )
 
@@ -53,6 +54,7 @@ class RestaurantEditForm(forms.ModelForm):
             "instagram_url",
             "youtube_url",
             "twitter_url",
+            "location_url",
             "enable_sending",
         )
 

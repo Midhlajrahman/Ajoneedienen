@@ -18,7 +18,7 @@
             <div class="input-group bg-white rounded shadow-sm mt-0">
                 <span class="input-group-text bg-transparent border-0 rounded-0"><i class="feather-search"></i></span>
                 <input type="text" class="form-control bg-transparent border-0 rounded-0 px-0 shadow-none" name="q" value="{{request.GET.q|default:''}}"
-                    placeholder="Search Menu" aria-label="Search ...">
+                    placeholder="Search Services" aria-label="Search ...">
             </div>
         </form>
     </div>
@@ -50,7 +50,7 @@
                     <div class="input-group bg-white rounded shadow-sm mt-0">
                         <span class="input-group-text bg-transparent border-0 rounded-0"><i class="feather-search"></i></span>
                         <input type="text" class="form-control bg-transparent border-0 rounded-0 px-0 shadow-none" name="q" value="{{request.GET.q|default:''}}"
-                            placeholder="Search Menu" aria-label="Search ...">
+                            placeholder="Search Services" aria-label="Search ...">
                     </div>
                 </form>
             </div>
@@ -92,8 +92,12 @@
 
         <div class="socials text-center my-4">
             <div class="d-flex align-items-center justify-content-center">
+                {% if restaurant.location_url %}
+                <a class="shadow sicon me-1" title="Location" target="_blank" href="{{restaurant.location_url}}">
+                    <img src="{% static 'web/img/location.png' %}"></a>
+                {% endif %}
                 {% if restaurant.phone %}
-                <a class="shadow sicon me-1" title="Call" target="_blank" href=tel:{{restaurant.phone|slugify}}">
+                <a class="shadow sicon me-1" title="Call" target="_blank" href=tel:"{{restaurant.phone|slugify}}">
                     <img src="{% static 'web/img/call.png' %}"></a>
                 {% endif %}
                 {% if restaurant.whatsapp %}
@@ -163,7 +167,7 @@
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal">
         Give A Feedback
     </button>
-</div>
+</div> 
 
 {% endblock %}
 
