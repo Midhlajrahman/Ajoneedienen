@@ -6,6 +6,34 @@
 {% endblock %}
 
 {% block content %}
+<style>
+    .float{
+        position:fixed;
+        width:120px; /* Adjust width as needed */
+        height:60px; /* Adjust height as needed */
+        bottom:60px;
+        right:20px;
+        background-color:#dd2e52;
+        color:#FFF;
+        border-radius:30px; /* Half of the height for circular shape */
+        text-align:center;
+        line-height: 60px; /* Center the text vertically */
+        font-size:18px;
+        box-shadow: 2px 2px 3px #999;
+        z-index:100;
+        text-decoration: none; /* Remove underline */
+    }
+
+    .float:hover {
+        background-color: #198754; /* Change color on hover */
+    }
+</style>
+
+{% if restaurant.is_Booknow %}
+    <a href="https://wa.me/{{ restaurant.whatsapp|slugify }}" class="float" target="_blank">
+        Book Now
+    </a>
+{% endif %}
 <div class="osahan-home-page">
 
     <div class="bg-primary p-3 d-none">

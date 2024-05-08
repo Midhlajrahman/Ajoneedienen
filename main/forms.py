@@ -15,6 +15,7 @@ class RestaurantCreateForm(forms.ModelForm):
             "logo",
             "address",
             "phone",
+            "whatsapp",
             "district",
             "facebook_url",
             "instagram_url",
@@ -49,6 +50,7 @@ class RestaurantEditForm(forms.ModelForm):
             "logo",
             "address",
             "phone",
+            "whatsapp",
             "district",
             "facebook_url",
             "instagram_url",
@@ -56,6 +58,7 @@ class RestaurantEditForm(forms.ModelForm):
             "twitter_url",
             "location_url",
             "enable_sending",
+            "is_Booknow",
         )
 
 

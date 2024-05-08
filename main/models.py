@@ -61,6 +61,7 @@ class Restaurant(BaseModel):
     visitor_count = models.PositiveIntegerField(default=1)
 
     enable_sending = models.BooleanField(default=False)
+    is_Booknow = models.BooleanField(default=False)
 
     class Meta:
         ordering = ("name",)
