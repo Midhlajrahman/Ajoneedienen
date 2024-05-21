@@ -7,6 +7,11 @@ from .models import Product, Restaurant
 class RestaurantCreateForm(forms.ModelForm):
     username = forms.CharField(max_length=200, label="Username")
     password = forms.CharField(widget=forms.PasswordInput(), max_length=200, label="Password")
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.whatsapp_message is None:
+            self.initial['whatsapp_message'] = "Hello! I want to know more about your service"
 
     class Meta:
         model = Restaurant
@@ -16,6 +21,7 @@ class RestaurantCreateForm(forms.ModelForm):
             "address",
             "phone",
             "whatsapp",
+            "whatsapp_message",
             "district",
             "facebook_url",
             "instagram_url",
@@ -43,6 +49,12 @@ class RestaurantCreateForm(forms.ModelForm):
 
 
 class RestaurantEditForm(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.whatsapp_message is None:
+            self.initial['whatsapp_message'] = "Hello! I want to know more about your service"
+            
     class Meta:
         model = Restaurant
         fields = (
@@ -51,6 +63,7 @@ class RestaurantEditForm(forms.ModelForm):
             "address",
             "phone",
             "whatsapp",
+            "whatsapp_message",
             "district",
             "facebook_url",
             "instagram_url",

@@ -30,9 +30,15 @@
 </style>
 
 {% if restaurant.is_Booknow %}
-    <a href="https://wa.me/{{ restaurant.whatsapp|slugify }}" class="float" target="_blank">
-        Book Now
-    </a>
+    {% if restaurant.whatsapp_message %}
+        <a href="https://wa.me/{{ restaurant.whatsapp|slugify }}?text={{ restaurant.whatsapp_message }}" class="float" target="_blank">
+            Book Now
+        </a>
+    {% else %}
+        <a href="https://wa.me/{{ restaurant.whatsapp|slugify }}?text=Hello%21%20I%20want%20to%20know%20more%20about%20your%20service" class="float" target="_blank">
+            Book Now
+        </a>
+    {% endif %}
 {% endif %}
 <div class="osahan-home-page">
 
@@ -69,7 +75,7 @@
             <div class="col-md-8 mt-2">
                 <div class="marquee rounded">
                     {% for notification in notifications %}
-                        <span class="marquee-text">👋 {{ notification }}</span>
+                        <span class="marquee-text">{{ notification }}</span>
                     {% endfor %}
                 </div>
             </div>

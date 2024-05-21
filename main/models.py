@@ -49,6 +49,7 @@ class Restaurant(BaseModel):
 
     phone = models.CharField(max_length=200, help_text="Phone number with country code")
     whatsapp = models.CharField(max_length=200, help_text="Whatsapp number with country code")
+    whatsapp_message = models.CharField(max_length=200, blank=True, null=True)
     facebook_url = models.URLField(max_length=200, blank=True, null=True)
     instagram_url = models.URLField(max_length=200, blank=True, null=True)
     youtube_url = models.URLField(max_length=200, blank=True, null=True)
