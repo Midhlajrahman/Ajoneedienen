@@ -1,16 +1,5 @@
 $(document).ready(function () {
 
-    // Check if the modal has been shown before
-    var modalShownBefore = sessionStorage.getItem('modalShownBefore');
-
-    if (!modalShownBefore) {
-        // Show the modal
-        $('#feedbackModal').modal('show');
-
-        // Set the flag in session storage
-        sessionStorage.setItem('modalShownBefore', true);
-    }
-
     // Handle form submission using AJAX
     $('#feedbackForm').submit(function (e) {
         e.preventDefault();
@@ -43,4 +32,9 @@ $(document).ready(function () {
         // Add 'active' class to the clicked button
         $(this).addClass('active');
     });
+});
+
+// Show the modal only when the button is clicked
+$('#feedbackButton').click(function () {
+    $('#feedbackModal').modal('show');
 });

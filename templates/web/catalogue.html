@@ -91,6 +91,13 @@
         </div>
     </div>
     {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <p>Images used are only for illustrative purposes.</p>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <div class="row px-3">
@@ -198,9 +205,10 @@
     <h6>Total Visitors Count : {{restaurant.visitor_count}}</h6>
 </div>
 <div class="text-center my-4">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+    <button id="feedbackButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal">
         Give A Feedback
     </button>
+    
 </div> 
 
 {% endblock %}
