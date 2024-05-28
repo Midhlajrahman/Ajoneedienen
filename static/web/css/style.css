@@ -1403,6 +1403,9 @@ footer .text-muted {
   text-overflow: ellipsis;
   cursor: pointer;
 }
+.list-card .illustrative-text{
+  color:  #afafaf !important;
+}
 
 .slider {
   position: relative;
