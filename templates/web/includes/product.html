@@ -20,6 +20,7 @@
             <div class="list-card-body">
                 <h6 class="mb-1">
                     <a href="{{product.get_web_url}}" class="text-black">{{product.name}}</a>
+                    <p class="text-gray mb-3">Images used are only for <br> illustrative purposes.</p>
                 </h6>
                 {% if not product.get_ac_price %}
                 <p class="text-dark my-2">&#8377; {{ product.get_non_ac_price }}</p> 
@@ -27,7 +28,13 @@
                 <p class="text-dark my-2">&#8377; {{ product.get_non_ac_price }} <span class="text-secondary">/ non-ac</span> </p> 
                 <p class="text-dark mb-0">&#8377; {{ product.get_ac_price }} <span class="text-secondary">/ ac</span></p>
                 {% endif %} 
-                <p class="text-gray mb-3">{{product.description|truncatechars:"165"}}</p>
+                {% if product.description %}
+                <p class="text-gray mb-3">{{ product.description|truncatechars:"165" }}
+                    <a class="read-more" data-bs-toggle="modal" data-bs-target="#{{ product.pk }}">Read More</a>
+                </p>
+                {% else %}
+                    <p class="text-gray mb-3">{{ product.description|truncatechars:"165" }}</p>
+                {% endif %}
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{product.pk}}">
                     Add to List
                 </button>

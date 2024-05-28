@@ -129,10 +129,41 @@
         </div>
         {% endif %}
 
-
-
         <div class="socials text-center my-4">
             <div class="d-flex align-items-center justify-content-center">
+                {% if restaurant.phone %}
+                <a class="shadow sicon me-1" title="Call" target="_blank" href="tel:{{restaurant.phone|slugify}}">
+                    <img src="{% static 'web/img/call.png' %}"></a>
+                {% endif %}
+                {% if restaurant.whatsapp %}
+                <a class="shadow sicon me-1" title="whatsapp" target="_blank" href="https://wa.me/{{restaurant.whatsapp|slugify}}">
+                    <img src="{% static 'web/img/whatsapp.png' %}"></a>
+                {% endif %}
+                {% if restaurant.facebook_url %}
+                <a class="shadow sicon me-1" title="Facebook" target="_blank" href="{{restaurant.facebook_url}}">
+                    <img src="{% static 'web/img/facebook.png' %}"></a>
+                {% endif %}
+                {% if restaurant.instagram_url %}
+                <a class="shadow sicon me-1" title="Instagram" target="_blank" href="{{restaurant.instagram_url}}">
+                    <img src="{% static 'web/img/instagram.png' %}"></a>
+                {% endif %}
+                {% if restaurant.youtube_url %}
+                <a class="shadow sicon me-1" title="Youtube" target="_blank" href="{{restaurant.youtube_url}}">
+                    <img src="{% static 'web/img/youtube.png' %}"></a>
+                {% endif %}
+                {% if restaurant.twitter_url %}
+                <a class="shadow sicon me-1" title="Twitter" target="_blank" href="{{restaurant.twitter_url}}">
+                    <img src="{% static 'web/img/twitter.png' %}"></a>
+                {% endif %}
+                <a href="javascript:void(0)" class="shadow sicon me-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <img src="{% static 'web/img/profile.png' %}"></a>
+                </a>
+
+            </div>
+        </div>
+        {% if restaurant.is_socialmedia %}
+         <div class="socials text-center my-4 ">
+            <div class="d-grid align-items-center justify-content-end social-media">
                 {% if restaurant.location_url %}
                 <a class="shadow sicon me-1" title="Location" target="_blank" href="{{restaurant.location_url}}">
                     <img src="{% static 'web/img/location.png' %}"></a>
@@ -166,7 +197,8 @@
                 </a>
 
             </div>
-        </div>
+        </div> 
+        {% endif %}
         
     </div>
 

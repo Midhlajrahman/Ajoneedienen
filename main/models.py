@@ -63,6 +63,7 @@ class Restaurant(BaseModel):
 
     enable_sending = models.BooleanField(default=False)
     is_Booknow = models.BooleanField(default=False)
+    is_socialmedia = models.BooleanField(default=False)
 
     class Meta:
         ordering = ("name",)

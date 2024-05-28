@@ -77,7 +77,7 @@
         <div class="socials text-center my-4">
             <div class="d-flex align-items-center justify-content-center">
                 {% if restaurant.phone %}
-                <a class="shadow sicon me-1" title="Call" target="_blank" href=tel:{{restaurant.phone|slugify}}">
+                <a class="shadow sicon me-1" title="Call" target="_blank" href="tel:{{restaurant.phone|slugify}}">
                     <img src="{% static 'web/img/call.png' %}"></a>
                 {% endif %}
                 {% if restaurant.whatsapp %}

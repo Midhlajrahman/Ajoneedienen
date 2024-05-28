@@ -55,6 +55,7 @@
         <button class="btn btn-success w-100 btn-lg" {% if restaurant.enable_sending == True %} onclick="sendCartToWhatsApp()" {% else %} disabled {% endif %}>Send List <i class="feather-arrow-right"></i></a>
     </div>
     
+    
     {% else %}
     <div class="p-3">Your List is Empty</div>
     {% endif %}

@@ -29,6 +29,7 @@ class RestaurantCreateForm(forms.ModelForm):
             "twitter_url",
             "location_url",
             "enable_sending",
+            "is_socialmedia"
         )
 
     def clean_username(self):
@@ -72,6 +73,7 @@ class RestaurantEditForm(forms.ModelForm):
             "location_url",
             "enable_sending",
             "is_Booknow",
+            "is_socialmedia"
         )
 
 

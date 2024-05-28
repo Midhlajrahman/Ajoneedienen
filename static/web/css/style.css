@@ -1394,3 +1394,68 @@ footer .text-muted {
 .option-container{
   display: flex !important;
 }
+.list-card .read-more {
+  color: inherit;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.slider {
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.social-media{
+    gap: 10px !important;
+    bottom: 15%;
+    left: 96%;
+    position: fixed;
+    z-index: 25;
+}
+@media (max-width: 991px) {
+  .social-media{
+    left: 84% !important;
+}
+}
